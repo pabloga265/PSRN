@@ -1,39 +1,113 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import React from 'react'
+import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator } from 'react-navigation'
+import HomeScreen from './src/screens/HomeScreen'
+import SecondScreen from './src/screens/SecondScreen'
+import HuntersScreen from './src/screens/HuntersScreen'
+import ModalScreen from './src/screens/ModalScreen'
+import { BackHandler } from 'react-native'
+import { observer } from 'mobx-react'
+import generalState from './src/state/AppState'
+import StackRoutes from './src/routes'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+generalState.init()
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Button testID={"yayButton"} title={"yay!"} onPress={()=>alert('asd')} />
-      </View>
-    );
-  }
+HomeScreen.navigationOptions = {
+  tabBarLabel: '',
+  tabBarIcon: ({ tintColor, focused }) => (
+    <Icon
+      name={focused ? 'home' : 'home'}
+      size={24}
+      style={{ color: tintColor }}
+    />
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+SecondScreen.navigationOptions = {
+  tabBarLabel: '',
+  tabBarIcon: ({ tintColor, focused }) => (
+    <Icon
+      name={focused ? 'group' : 'group'}
+      size={24}
+      style={{ color: tintColor }}
+    />
+  )
+}
+
+HuntersScreen.navigationOptions = {
+  tabBarLabel: '',
+  tabBarIcon: ({ tintColor, focused }) => (
+    <Icon
+      name={focused ? 'group' : 'group'}
+      size={24}
+      style={{ color: tintColor }}
+    />
+  )
+}
+
+const DrawerStack = createBottomTabNavigator({
+  Home: {
+    screen: HomeScreen
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  Second: {
+    screen: SecondScreen
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  Hunters: {
+    screen: HuntersScreen
+  }
+},
+{
+  headerMode: 'float',
+  lazy: true,
+  swipeEnabled: true,
+  tabBarOptions: {
+    activeTintColor: '#4f4f4f',
+    inactiveTintColor: '#c4c4c4',
+    showLabel: false,
+    showIcon: true,
+    indicatorStyle: { opacity: 0 },
+    style: { backgroundColor: '#fffbfd', borderWidth: 0, borderColor: 'transparent' }
+  }
+})
+
+const RootStack = observer(createSwitchNavigator(
+  {
+    Main: {
+      screen: DrawerStack
+    },
+    Modal: {
+      screen: ModalScreen
+    }
   },
-});
+  {
+    mode: 'modal',
+    headerMode: 'float',
+    transitionConfig: () => ({
+      transitionSpec: {
+        duration: 0
+      }
+    })
+  }
+))
+
+const stackRoutes = Object.assign({}, {root: RootStack}, StackRoutes)
+const stackNavigatorConfig = {headerMode: 'screen'}
+const StackNavigator = createStackNavigator(stackRoutes, stackNavigatorConfig)
+
+export default class App extends React.Component {
+  componentDidMount () {
+    BackHandler.addEventListener('hardwareBackPress', function () {
+      const { dispatch, navigation, nav } = this.props
+      if (nav.routes[0].index === 0 && nav.index === 0) {
+        BackHandler.exitApp()
+        return false
+      }
+      dispatch({ type: 'Navigation/BACK' })
+      return true
+    }.bind(this))
+  }
+
+  render () {
+    return <StackNavigator screenProps={{store: generalState}} />
+  }
+}
