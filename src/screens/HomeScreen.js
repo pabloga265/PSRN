@@ -1,7 +1,6 @@
 import React from 'react'
-import { View, Text, Button, TouchableHighlight, StyleSheet, TextInput } from 'react-native'
 import { observer } from 'mobx-react/native'
-import hunterActions from '../utils/utilHunters'
+import { DKGContainer, DKGNrmText, DKGRadialMenu, DKGWarText, DKGErrText, DKGSccText } from '../components/components'
 
 @observer
 class HomeScreen extends React.Component {
@@ -16,21 +15,15 @@ class HomeScreen extends React.Component {
 
   render () {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title='Go to Details'
-          onPress={() => this.props.navigation.navigate('Second')}
-        />
-      </View>
+      <DKGContainer>
+        <DKGNrmText>Home Screen</DKGNrmText>
+        <DKGWarText>Home Screen</DKGWarText>
+        <DKGErrText>Home Screen</DKGErrText>
+        <DKGSccText>Home Screen</DKGSccText>
+        <DKGRadialMenu />
+      </DKGContainer>
     )
   }
 }
-
-const NoList = () => (
-  <View>
-    <Text>No List, Add List To Get Started</Text>
-  </View>
-)
 
 export default HomeScreen

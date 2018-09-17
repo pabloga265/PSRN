@@ -8,7 +8,7 @@ import { BackHandler } from 'react-native'
 import { observer } from 'mobx-react'
 import generalState from './src/state/AppState'
 import StackRoutes from './src/routes'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 generalState.init()
 
@@ -27,7 +27,7 @@ SecondScreen.navigationOptions = {
   tabBarLabel: '',
   tabBarIcon: ({ tintColor, focused }) => (
     <Icon
-      name={focused ? 'group' : 'group'}
+      name={focused ? 'flask' : 'flask'}
       size={24}
       style={{ color: tintColor }}
     />
@@ -57,16 +57,16 @@ const DrawerStack = createBottomTabNavigator({
   }
 },
 {
-  headerMode: 'float',
+  headerMode: 'none',
   lazy: true,
   swipeEnabled: true,
   tabBarOptions: {
-    activeTintColor: '#4f4f4f',
-    inactiveTintColor: '#c4c4c4',
+    inactiveTintColor: '#91AEC1',
+    activeTintColor: '#274156',
     showLabel: false,
     showIcon: true,
     indicatorStyle: { opacity: 0 },
-    style: { backgroundColor: '#fffbfd', borderWidth: 0, borderColor: 'transparent' }
+    style: { backgroundColor: '#D0CCD0', borderWidth: 0, borderColor: 'transparent' }
   }
 })
 
@@ -81,7 +81,7 @@ const RootStack = observer(createSwitchNavigator(
   },
   {
     mode: 'modal',
-    headerMode: 'float',
+    headerMode: 'none',
     transitionConfig: () => ({
       transitionSpec: {
         duration: 0
@@ -91,7 +91,7 @@ const RootStack = observer(createSwitchNavigator(
 ))
 
 const stackRoutes = Object.assign({}, {root: RootStack}, StackRoutes)
-const stackNavigatorConfig = {headerMode: 'screen'}
+const stackNavigatorConfig = {headerMode: 'none'}
 const StackNavigator = createStackNavigator(stackRoutes, stackNavigatorConfig)
 
 export default class App extends React.Component {

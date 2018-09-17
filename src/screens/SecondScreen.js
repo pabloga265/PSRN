@@ -1,10 +1,11 @@
 import React from 'react'
 import { View, Text, Button } from 'react-native'
+import { DKGContainer } from '../components/components'
 
 export default class DetailsScreen extends React.Component {
   render () {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <DKGContainer>
         <Text>Details Screen</Text>
         <Button
           title='Open modal'
@@ -14,7 +15,7 @@ export default class DetailsScreen extends React.Component {
           title='Go to Details'
           onPress={() => this.props.navigation.navigate('Home')}
         />
-      </View>
+      </DKGContainer>
     )
   }
 }

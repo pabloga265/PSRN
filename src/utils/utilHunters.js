@@ -18,18 +18,14 @@ const hunterActions = {
 
   generateName: (sex) => {
     let names = {
-      M: ['Pablo', 'Gagik', 'Nerif'],
-      F: ['Minna', 'Bast', 'Nora']
+      M: ['Pablo', 'Gagik', 'Nerif', 'Ugeen'],
+      F: ['Minna', 'Bast', 'Nora', 'Ada']
     }
 
     return names[sex][Math.floor(Math.random() * Math.floor(names[sex].length))]
   },
 
-  getId: () => {
-    debugger
-    let id = generalState.getId
-    return id
-  },
+  getNextId: () => generalState.getId,
 
   calculateStat (hunter, stat) {
     let statsMap = {
@@ -54,7 +50,11 @@ const hunterActions = {
     return Math.floor(100 + H[S.main] + H[S.scnd] / 2 + (E.length ? E.reduce((ac, item) => ac + item[stat] + item[S.main] + item[S.scnd] / 2) : 0))
   },
 
-  assignHuntersToTasks () { }
+  calculateSpeed: (h) => h.stats.REFLEX * 10 - (h.stats.STRENGTH - h.eqipment.reduce(this.calculateWeight, 0)),
+
+  calculateWeight: (acc, cur) => acc + cur.weight,
+
+  assignToTasks () { }
 }
 
 export default hunterActions

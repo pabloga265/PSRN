@@ -17,8 +17,6 @@ class ObservableGeneralState {
       town: this.parseTown(item[0].town),
       nextHunterId: item[0].hunters[item[0].hunters.length - 1].id + 1
     }
-
-    hunterActions.assignHuntersToTasks()
   }
 
 

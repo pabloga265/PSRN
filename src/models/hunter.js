@@ -7,7 +7,7 @@ class Hunter {
     this.level = 0
     this.age = 0
     this.name = hunterActions.generateName(this.sex)
-    this.id = hunterActions.getId()
+    this.id = hunterActions.getNextId()
     this.dad = daddy.id
     this.mum = mummy.id
     this.born = new Date()
