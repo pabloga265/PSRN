@@ -71,14 +71,11 @@ const GeneralSchema = {
   properties: {
     tutorial: {type: 'bool', default: false},
     hunters: 'Hunter[]',
-    town: 'Town[]'
+    town: 'Town[]',
+    floorReached: {type: 'int', default: 0}
   }
 }
 
-// ------------------ API ------------------
-// PUT     - Update/Replace   - 405 (Method Not Allowed)
-// PATCH   - Update/Modify    - 405 (Method Not Allowed)
-// DELETE  - Delete           - 405 (Method Not Allowed)
 class ApiRealm {
   constructor (options) {
     this.schemaName = {
@@ -108,7 +105,7 @@ class ApiRealm {
       .catch(error => this.errorHandler(error))
   }
 
-  PUT (schema, data) {
+  addHunter (schema, data) {
     let schemas = schema.map(schema => this.schemaName['General']).reduce((acc, val) => acc.concat(val), [])
     Realm.open({schema: [...schemas]})
       .then(realm => {
@@ -140,7 +137,7 @@ class ApiRealm {
       .then(realm => {
         if (realm.empty) {
           realm.write(() => {
-            let initialState = realm.create('General', {tutorial: false, hunters: [], town: []})
+            let initialState = realm.create('General', {tutorial: false, hunters: [], town: [], floorReached: 0})
             initialState.hunters.push({
               id: 1,
               sex: 'M',

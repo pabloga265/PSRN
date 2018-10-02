@@ -1,6 +1,17 @@
 import React from 'react'
 import { observer } from 'mobx-react/native'
-import { DKGContainer, DKGNrmText, DKGRadialMenu, DKGWarText, DKGErrText, DKGSccText } from '../components/components'
+import {
+  DKGContainer,
+  DKGNrmText,
+  DKGWarText,
+  DKGErrText,
+  DKGSccText,
+  DKGNrmTextBG,
+  DKGWarTextBG,
+  DKGErrTextBG,
+  DKGSccTextBG
+} from '../components/components'
+import DKGRadialMenu from '../components/radialMenu'
 
 @observer
 class HomeScreen extends React.Component {
@@ -16,10 +27,14 @@ class HomeScreen extends React.Component {
   render () {
     return (
       <DKGContainer>
-        <DKGNrmText>Home Screen</DKGNrmText>
-        <DKGWarText>Home Screen</DKGWarText>
-        <DKGErrText>Home Screen</DKGErrText>
-        <DKGSccText>Home Screen</DKGSccText>
+        <DKGNrmText>Texto normal</DKGNrmText>
+        <DKGWarText>Texto warning</DKGWarText>
+        <DKGErrText>Texto error</DKGErrText>
+        <DKGSccText>Texto success</DKGSccText>
+        <DKGNrmTextBG>Normal background</DKGNrmTextBG>
+        <DKGWarTextBG>Warning background</DKGWarTextBG>
+        <DKGErrTextBG>Error background</DKGErrTextBG>
+        <DKGSccTextBG>Success background</DKGSccTextBG>
         <DKGRadialMenu />
       </DKGContainer>
     )

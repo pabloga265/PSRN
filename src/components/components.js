@@ -1,5 +1,5 @@
 import React, { Component } from 'React'
-import { View, Text, PanResponder, Animated } from 'react-native'
+import { View, Text, ScrollView} from 'react-native'
 import style from '../style/generalStyle'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
@@ -11,6 +11,17 @@ export class DKGContainer extends Component {
   }
 }
 
+export class DKGScrollContainer extends Component {
+  render () {
+    return <ScrollView
+      style={style.scrollContainer}
+      contentContainerStyle={style.contentContainerStyle}
+      {...this.props}
+    >
+      {this.props.children}
+    </ScrollView>
+  }
+}
 // DKGButton
 // DKGScroll
 // DKGList
@@ -18,77 +29,48 @@ export class DKGContainer extends Component {
 /* STANDARD TEXT */
 export class DKGNrmText extends Component {
   render () {
-    return <Text style={style.nrmText} {...this.props}>{this.props.children}</Text>
+    return <Text {...this.props} style={[style.nrmText, this.props.style]} >{this.props.children}</Text>
   }
 }
 
 export class DKGWarText extends Component {
   render () {
-    return <Text style={style.warText} {...this.props}>{this.props.children}</Text>
+    return <Text {...this.props} style={[style.warText, this.props.style]} >{this.props.children}</Text>
   }
 }
 
 export class DKGErrText extends Component {
   render () {
-    return <Text style={style.ErrText} {...this.props}>{this.props.children}</Text>
+    return <Text {...this.props} style={[style.ErrText, this.props.style]} >{this.props.children}</Text>
   }
 }
 
 export class DKGSccText extends Component {
   render () {
-    return <Text style={style.sccText} {...this.props}>{this.props.children}</Text>
+    return <Text {...this.props} style={[style.sccText, this.props.style]} >{this.props.children}</Text>
   }
 }
 
-// DKGNrmTextWithBackground
-// DKGWarTextWithBackground
-// DKGErrTextWithBackground
-// DKGSccTextWithBackground
-
-/* RADIAL MENU */
-export class DKGRadialMenu extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      open: false,
-      pan: new Animated.ValueXY()
-    }
-  }
-
-  componentWillMount () {
-    this._val = { x: 0, y: 0 }
-    this.state.pan.addListener((value) => this._val = value)
-
-    this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: (e, gestureState) => true,
-      onPanResponderMove: Animated.event([
-        null, { dx: this.state.pan.x, dy: this.state.pan.y }
-      ]),
-      onPanResponderGrant: (e, gesture) => { this.setState({open: true}) },
-      onPanResponderRelease: (e, gesture) => {
-        this.setState({open: false})
-        Animated.spring(this.state.pan, {
-          toValue: { x: 0, y: 0 },
-          friction: 5
-        }).start()
-      }
-    })
-  }
-
+export class DKGNrmTextBG extends Component {
   render () {
-    const panStyle = {
-      transform: this.state.pan.getTranslateTransform()
-    }
+    return <Text {...this.props} style={[style.nrmTextBG, this.props.style]} >{this.props.children}</Text>
+  }
+}
 
-    return <View style={style.radialMenu_Container}>
-      <Animated.View {...this.panResponder.panHandlers} style={[panStyle, style.radialMenu]} {...this.props}>
-        <Icon
-          name={this.state.open ? 'circle' : 'dot-circle'}
-          size={50}
-          style={style.radialMenu_Icon}
-        />
-      </Animated.View>
-    </View>
+export class DKGWarTextBG extends Component {
+  render () {
+    return <Text {...this.props} style={[style.warTextBG, this.props.style]} >{this.props.children}</Text>
+  }
+}
+
+export class DKGErrTextBG extends Component {
+  render () {
+    return <Text {...this.props} style={[style.errTextBG, this.props.style]} >{this.props.children}</Text>
+  }
+}
+
+export class DKGSccTextBG extends Component {
+  render () {
+    return <Text {...this.props} style={[style.sccTextBG, this.props.style]} >{this.props.children}</Text>
   }
 }

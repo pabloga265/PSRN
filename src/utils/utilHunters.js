@@ -40,14 +40,19 @@ const hunterActions = {
       mana: {
         main: 'PERSONA',
         scnd: 'SMARTS'
+      },
+      perception: {
+        main: 'SMARTS',
+        scnd: 'REFLEX'
       }
     }
 
     let S = statsMap[stat]
     let H = hunter.stats
     let E = hunter.equipment
+    let L = hunter.level
 
-    return Math.floor(100 + H[S.main] + H[S.scnd] / 2 + (E.length ? E.reduce((ac, item) => ac + item[stat] + item[S.main] + item[S.scnd] / 2) : 0))
+    return Math.floor(10 * L + H[S.main] + H[S.scnd] / 2 + (E.length ? E.reduce((ac, item) => ac + item[stat] + item[S.main] + item[S.scnd] / 2) : 0))
   },
 
   calculateSpeed: (h) => h.stats.REFLEX * 10 - (h.stats.STRENGTH - h.eqipment.reduce(this.calculateWeight, 0)),

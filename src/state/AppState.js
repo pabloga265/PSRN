@@ -15,19 +15,21 @@ class ObservableGeneralState {
       tutorial: item[0].tutorial,
       hunters: this.parseHunters(item[0].hunters),
       town: this.parseTown(item[0].town),
-      nextHunterId: item[0].hunters[item[0].hunters.length - 1].id + 1
+      nextHunterId: item[0].hunters[item[0].hunters.length - 1].id + 1,
+      floorReached: item[0].floorReached
     }
   }
 
 
 
   /* get actions */
-  @computed get listHunters () {return this.generalState.hunters}
-  @computed get getId () {return this.generalState.nextHunterId++}
+  @computed get listHunters () { return this.generalState.hunters }
+  @computed get getId () { return this.generalState.nextHunterId++ }
+  @computed get getFloor () { return this.generalState.floorReached }
   
   @action addHunter (hunter) {
     this.generalState.hunters.push(hunter)
-    api.PUT(['Hunter'], hunter)
+    api.addHunter(['Hunter'], hunter)
   }
 
   /* Parsers */
@@ -51,6 +53,7 @@ class ObservableGeneralState {
           magical: 'int',   
           resistance: 'int'
         },
+        perception: hunterActions.calculateStat(hunter, 'perception'),
         stats: {
           CHARISMA: hunter.stats.CHARISMA,
           ENDURANCE: hunter.stats.ENDURANCE,
