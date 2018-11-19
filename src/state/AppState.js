@@ -23,7 +23,7 @@ class ObservableGeneralState {
 
 
   /* get actions */
-  @computed get listHunters () { return this.generalState.hunters }
+  @computed get getHunters () { return this.generalState.hunters }
   @computed get getId () { return this.generalState.nextHunterId++ }
   @computed get getFloor () { return this.generalState.floorReached }
   

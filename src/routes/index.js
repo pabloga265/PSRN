@@ -65,12 +65,12 @@ const DrawerStack = createBottomTabNavigator({
   lazy: true,
   swipeEnabled: true,
   tabBarOptions: {
-    inactiveTintColor: '#91AEC1',
-    activeTintColor: '#274156',
+    inactiveTintColor: '#737A88',
+    activeTintColor: '#51E3C2',
     showLabel: false,
     showIcon: true,
     indicatorStyle: { opacity: 0 },
-    style: { backgroundColor: '#D0CCD0', borderWidth: 0, borderColor: 'transparent' }
+    style: { backgroundColor: '#272C38', borderWidth: 0, borderColor: 'transparent' }
   }
 })
 

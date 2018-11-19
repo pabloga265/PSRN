@@ -53,7 +53,7 @@ const huntActions = {
     return true
   },
 
-  generateNewRoom: (floor, depth, modifier) => {
+  generateNewRoom: (floor, depth, modifier = null) => {
     return 'room'
   },
 
