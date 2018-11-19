@@ -10,7 +10,17 @@ const COLORS = {
   LBLUE: '#CEE5F2',
   DBLUE: '#7E8D85',
   LGREEN: '#AEBD38',
-  DGREEN: '#598234'
+  DGREEN: '#598234',
+
+  BG: '#575C68',
+  BODY: '#272C38',
+  TEXT: '#272C38',
+  TEXTLIGHT: '#737A88',
+  ELEM: '#313544',
+  ACCENT: '#51E3C2',
+  DARKACCENT: '#344F55',
+  LISTEVEN: '#222635',
+  LISTODD: '#282C3A'
 }
 
 export default StyleSheet.create({
@@ -19,7 +29,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     alignItems: 'center',
-    backgroundColor: COLORS.DGREY
+    backgroundColor: COLORS.BG
   },
   scrollContainer: {
     width: '100%',
@@ -32,7 +42,7 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   nrmText: {
-    color: COLORS.LGREY,
+    color: COLORS.TEXTLIGHT,
     fontSize: 16,
     lineHeight: 20
   },
@@ -103,18 +113,18 @@ export default StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
     minHeight: 50,
-    margin: 5,
+    margin: 1,
     flexDirection: 'row',
-    backgroundColor: COLORS.MDGREY
+    backgroundColor: COLORS.BODY
   },
   liContainerFocus: {
     margin: 1,
     minHeight: 200,
-    backgroundColor: COLORS.MDGREY
+    backgroundColor: COLORS.BODY
   },
   listContainerFloorNumber: {
     height: '100%',
-    backgroundColor: COLORS.MLGREY,
+    backgroundColor: COLORS.ELEM,
     width: '20%',
     paddingTop: 10,
     marginRight: 15,
@@ -135,7 +145,7 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   radialMenu: {
-    backgroundColor: COLORS.DGREY,
+    backgroundColor: COLORS.ACCENT,
     position: 'absolute',
     bottom: -20,
     borderRadius: 100,
@@ -143,10 +153,10 @@ export default StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: COLORS.LBLUE
+    borderColor: COLORS.DARKACCENT
   },
   radialMenu_Icon_Active: {
-    color: COLORS.LGREEN
+    color: COLORS.ACCENT
   },
   radialMenu_Choices: {
     flexDirection: 'row',
@@ -156,16 +166,16 @@ export default StyleSheet.create({
     height: '100%'
   },
   radialMenu_Choice: {
-    color: COLORS.LGREY
+    color: COLORS.ACCENT
   },
   radialMenu_Icon: {
-    color: COLORS.LGREY,
+    color: COLORS.DARKACCENT,
     alignSelf: 'center'
   },
 
   leftLine: {
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: COLORS.DARKACCENT,
     position: 'absolute',
     height: '100%',
     left: '15%'

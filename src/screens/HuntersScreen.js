@@ -9,11 +9,9 @@ export default class HuntersScreen extends React.Component {
   constructor (props) {
     super(props)
     this.listHunters = this.listHunters.bind(this)
-
     this.store = this.props.screenProps.store
-
     this.state = {
-      hunters: this.store.listHunters
+      hunters: this.store.getHunters
     }
   }
 
